@@ -1,13 +1,7 @@
-package src
-
-import "fmt"
+package field
 
 type Field struct {
     Name string
-    Type string
+    Tipo string
 	Required bool
-}
-
-func (f *Field) printName() {
-    fmt.Println(f.Name)
 }

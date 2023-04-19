@@ -2,13 +2,27 @@ package main
 
 import (
 	"fmt"
-	field "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/field"
+
+	h "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
 )
 
 func main() {
-	//Um pequeno campo de texto simples
-	f := field.Field{ Name: "Testerson", Type: "Teste", Required: false}
-	f2 := field.Field{ Name: "Testerson o Segundo", Type: "Teste Dois", Required: false}
-	fmt.Println("Hello: ", f.Name)
-	fmt.Println("Hello: ", f2.Name)
+    c := make(chan string) // cria o canal
+    html := h.StartHtml()
+    
+    html.AddField()
+    
+    go html.RunHtml(c) // chama a função em uma goroutine
+    res := <-c // espera pela resposta no canal
+
+    fmt.Println("Olá",res)
+    //Receber variáveis
+
+    //Gerar SQL
 }
+
+
+
+
+
+
