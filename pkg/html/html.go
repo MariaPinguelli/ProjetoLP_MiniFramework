@@ -10,6 +10,8 @@ import (
 
 type Html struct{
 	htmlString string
+	fieldList []string
+	values map[string]string
 }
 
 func StartHtml() (Html){
@@ -43,18 +45,19 @@ func (h *Html) AddField(){
     htmlString, _ := doc.Html()
 
 	h.htmlString = htmlString
+	h.fieldList = append(h.fieldList, campo.Name)
+	h.values = make(map[string]string)
 }
 
-func (h Html) RunHtml(c chan string) {
-	var res string
-
+func (h* Html) RunHtml() {
 	http.HandleFunc("/", func(resWriter http.ResponseWriter, resHttp *http.Request) {
         if resHttp.Method == "POST" {
             resHttp.ParseForm()
-			res = resHttp.FormValue("Teste")
-            fmt.Fprintf(resWriter, "Você digitou: %s", res)
-			c <- res
-			return
+			for i := 0; i < len(h.fieldList); i++ {
+				h.values[h.fieldList[i]] = resHttp.FormValue(h.fieldList[i])
+				fmt.Print(h.fieldList[i],":",h.values[h.fieldList[i]])
+			}
+            fmt.Fprint(resWriter, "Formulário enviado!")
         } else {
             html := h.htmlString
             fmt.Fprint(resWriter, html)
