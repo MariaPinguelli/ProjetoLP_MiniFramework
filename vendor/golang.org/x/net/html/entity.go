@@ -7,7 +7,7 @@ package html
 // All entities that do not end with ';' are 6 or fewer bytes long.
 const longestEntityWithoutSemicolon = 6
 
-// entity is a map from HTML entity names to their values. The semicolon matters:
+// entity is a map from HTML entity names to their Values. The semicolon matters:
 // https://html.spec.whatwg.org/multipage/syntax.html#named-character-references
 // lists both "amp" and "amp;" as two separate entries.
 //

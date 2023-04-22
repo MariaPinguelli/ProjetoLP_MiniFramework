@@ -42,7 +42,7 @@ lower-cased, and attributes are collected into a []Attribute. For example:
 	}
 
 The low-level API performs fewer allocations and copies, but the contents of
-the []byte values returned by Text, TagName and TagAttr may change on the next
+the []byte Values returned by Text, TagName and TagAttr may change on the next
 call to Next. For example, to extract an HTML page's anchor text:
 
 	depth := 0

@@ -57,7 +57,7 @@ Please note that because of the net/html dependency, goquery requires Go1.1+ and
 *    **2016-08-28 (v1.0.1)** : Optimize performance for large documents.
 *    **2016-07-27 (v1.0.0)** : Tag version 1.0.0.
 *    **2016-06-15** : Invalid selector strings internally compile to a `Matcher` implementation that never matches any node (instead of a panic). So for example, `doc.Find("~")` returns an empty `*Selection` object.
-*    **2016-02-02** : Add `NodeName` utility function similar to the DOM's `nodeName` property. It returns the tag name of the first element in a selection, and other relevant values of non-element nodes (see [doc][] for details). Add `OuterHtml` utility function similar to the DOM's `outerHTML` property (named `OuterHtml` in small caps for consistency with the existing `Html` method on the `Selection`).
+*    **2016-02-02** : Add `NodeName` utility function similar to the DOM's `nodeName` property. It returns the tag name of the first element in a selection, and other relevant Values of non-element nodes (see [doc][] for details). Add `OuterHtml` utility function similar to the DOM's `outerHTML` property (named `OuterHtml` in small caps for consistency with the existing `Html` method on the `Selection`).
 *    **2015-04-20** : Add `AttrOr` helper method to return the attribute's value or a default value if absent. Thanks to [piotrkowalczuk][piotr].
 *    **2015-02-04** : Add more manipulation functions - Prepend* - thanks again to [Andrew Stone][thatguystone].
 *    **2014-11-28** : Add more manipulation functions - ReplaceWith*, Wrap* and Unwrap - thanks again to [Andrew Stone][thatguystone].

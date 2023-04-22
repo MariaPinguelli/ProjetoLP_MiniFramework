@@ -26,7 +26,7 @@ func (s *Selection) EachWithBreak(f func(int, *Selection) bool) *Selection {
 }
 
 // Map passes each element in the current matched set through a function,
-// producing a slice of string holding the returned values. The function
+// producing a slice of string holding the returned Values. The function
 // f is called for each element in the selection with the index of the
 // element in that selection starting at 0, and a *Selection that contains
 // only that element.

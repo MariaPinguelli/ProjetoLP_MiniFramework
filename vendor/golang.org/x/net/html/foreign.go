@@ -210,7 +210,7 @@ var svgAttributeAdjustments = map[string]string{
 	"stitchtiles":         "stitchTiles",
 	"surfacescale":        "surfaceScale",
 	"systemlanguage":      "systemLanguage",
-	"tablevalues":         "tableValues",
+	"tableValues":         "tableValues",
 	"targetx":             "targetX",
 	"targety":             "targetY",
 	"textlength":          "textLength",
