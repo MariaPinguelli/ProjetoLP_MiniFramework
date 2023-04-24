@@ -50,4 +50,5 @@ func (r Retangulo) perimetro() float64 {
 Um tipo é considerado compatível com uma interface se implementar todos os métodos definidos na interface. Temos uma interface Forma e Retangulo implementa todos os métodos de Forma. Logo, é compatível e pode-se atribuir uma variável do tipo 'Retangulo' a uma do tipo 'Formula'.
 
 <h2> Documentação do projeto </h2
-Para desenvolver um mini-framework web, nos inspiramos no pacote "html/template", que fornece um mecanismo de templates para gerar código HTML dinamicamente, e no pacote "database/sql", que fornece uma interface comum para acessar diferentes bancos de dados, sendo ambos da biblioteca padrão.
+    <br>
+Para desenvolver um mini-framework web, nos inspiramos no pacote 'html/template', que fornece um mecanismo de templates para gerar código HTML dinamicamente, e no pacote 'database/sql', que fornece uma interface comum para acessar diferentes bancos de dados, sendo ambos da biblioteca padrão.
