@@ -1,13 +1,13 @@
-package src
-
-import "fmt"
+package field
 
 type Field struct {
     Name string
-    Type string
+    Tipo string
 	Required bool
+    SelectedValue string
 }
 
-func (f *Field) printName() {
-    fmt.Println(f.Name)
+func CreateField(newName string, newTipo string, isRequired bool) (Field){
+    newField := Field{Name: newName, Tipo: newTipo, Required: isRequired}
+    return newField
 }
