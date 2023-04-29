@@ -1,17 +1,17 @@
 package model
 
 type Frase struct{
-	tamanho string
-	verboso string
-	nulo bool
+	Tamanho int
+	Verboso string
+	Nulo bool
 }
 
 type Texto struct{
-	verboso string
-	nulo bool
+	Verboso string
+	Nulo bool
 }
 
 type Data struct{
-	verboso string
-	nulo bool
+	Verboso string
+	Nulo bool
 }

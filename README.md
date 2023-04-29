@@ -55,8 +55,9 @@ Para desenvolver um mini-framework web, nos inspiramos no pacote 'html/template'
 
 <h2> Como executar o projeto? </h2
     <br>
-Para executar o projeto, crie um arquivo na raíz do projeto, chame as funções que precisar usar, e execute o seguinte comando:
+Para executar o projeto, copie o arquivo ".config.json", e renomeie para "config.json", dentro do json recém renomeado coloque o caminho absoluto para o arquivo que irá criar o formulário.
+Após essa configuração, no terminal, é só navegar até a pasta raiz e executar o seguinte comando
 
 ```
-go run github.com/MariaPinguelli/ProjetoLP_MiniFramework/cmd/main seu_arquivo.go
+go run github.com/MariaPinguelli/ProjetoLP_MiniFramework/cmd/main
 ```
