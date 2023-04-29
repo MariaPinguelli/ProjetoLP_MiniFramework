@@ -1,27 +1,37 @@
 package main
 
 import (
-	//"fmt"
-	h "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
-    sql "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/sql"
+	"fmt"
+	"os"
+	//"os/exec"
+	generator "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/generator"
 )
 
 func main() {
-    html := h.StartHtml()
-    
-    html.AddTextField("Nome Completo", "nome", true)
-    // html.AddTextAreaField("Sobre você", "descricao", false)
-    // html.AddSelectField("Ano de nascimento", "dataNascimento", false, []string{"1999", "2000", "2001", "2002", "2003", "2004"})
-    html.AddSubmitButton()
-    
-    html.RunHtml() // chama a função em uma goroutine
+	/*
+		if len(os.Args) < 2 {
+			fmt.Println("Por favor declare no comando o arquivo a ser executado!")
+			return
+		}
 
-    //Gerar SQL
-    sql.CreateTableAndInsert("teste", "nome", html, `C:\Users\Maria Fernanda\Desktop\`)
+		programName := "C:/Users/Maria Fernanda/Desktop/ProjetoLP_MiniFramework/"+os.Args[1]
+
+		cmd := exec.Command("go", "run", programName)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		err := cmd.Run()
+		if err != nil {
+			fmt.Printf("Erro ao executar o programa %s: %v\n", programName, err)
+	*/
+
+	args := os.Args[1:]
+	fmt.Println(args)
+	arguments, flag := generator.ProcessInput(args)
+
+	fmt.Println("Argumentos separados:")
+	fmt.Println(arguments)
+
+	fmt.Println("Campos HTML gerados:")
+	fmt.Println(flag)
+
 }
-
-
-
-
-
-
