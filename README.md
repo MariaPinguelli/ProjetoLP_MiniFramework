@@ -52,3 +52,11 @@ Um tipo é considerado compatível com uma interface se implementar todos os mé
 <h2> Documentação do projeto </h2
     <br>
 Para desenvolver um mini-framework web, nos inspiramos no pacote 'html/template', que fornece um mecanismo de templates para gerar código HTML dinamicamente, e no pacote 'database/sql', que fornece uma interface comum para acessar diferentes bancos de dados, sendo ambos da biblioteca padrão.
+
+<h2> Como executar o projeto? </h2
+    <br>
+Para executar o projeto, crie um arquivo na raíz do projeto, chame as funções que precisar usar, e execute o seguinte comando:
+
+```
+go run github.com/MariaPinguelli/ProjetoLP_MiniFramework/cmd/main seu_arquivo.go
+```
