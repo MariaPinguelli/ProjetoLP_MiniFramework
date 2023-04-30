@@ -2,37 +2,44 @@ package generator
 
 import (
 	"fmt"
-	html "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
-	//model "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/model"
+	"github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
+	model "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/model"
 	"strings"
 )
 
-func GenerateHTMLFields(args []string) string {
-    html.StartHtml()
-	var fields string
-    for _, arg := range args {
-        fields += fmt.Sprintf(`<label for="%s">%s:</label>
-            <input type="text" id="%s" name="%s"><br><br>`, arg, arg, arg, arg)
-    }
-    return fields
+func ProcessInput(args []string) []string {
+	var flags []string
+	var arguments []string
+
+	for _, arg := range args {
+		if strings.HasPrefix(arg, "-") {
+			flags = append(flags, arg)
+		} else {
+			arguments = append(arguments, arg)
+		}
+	}
+
+	return arguments
 }
 
-func ProcessInput(args []string) ([]string, string) {
-    var flags []string
-    var arguments []string
-
-    for _, arg := range args {
-        if strings.HasPrefix(arg, "-") {
-            flags = append(flags, arg)
-        } else {
-            arguments = append(arguments, arg)
-        }
-    }
-
-    fields := GenerateHTMLFields(arguments)
-
-    return arguments, fields
+func GenerateHTMLFields(models []interface{}) {
+	htmlForm := html.StartHtml()
+	for _, m := range models {
+		// Checar o tipo do modelo e gerar um campo HTML apropriado
+		switch m.(type) {
+		case model.Frase:
+			frase := m.(model.Frase)
+			htmlForm.AddTextField("Frase", strings.ToLower(fmt.Sprintf("%T", frase)), true)
+		case model.Texto:
+			texto := m.(model.Texto)
+			htmlForm.AddTextAreaField("Texto", strings.ToLower(fmt.Sprintf("%T", texto)), true)
+		case model.Data:
+			data := m.(model.Data)
+			htmlForm.AddTextField("Data", strings.ToLower(fmt.Sprintf("%T", data)), true)
+		default:
+			// Ignorar modelos desconhecidos
+		}
+	}
+    htmlForm.AddSubmitButton()
+    htmlForm.RunHtml()
 }
-
-
-

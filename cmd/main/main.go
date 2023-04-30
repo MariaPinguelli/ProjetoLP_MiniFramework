@@ -1,10 +1,13 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
+	informacoes "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/informacoes"
+	model "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/model"
+	generator "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/generator"
+
 	"os"
 	//"os/exec"
-	generator "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/generator"
 )
 
 func main() {
@@ -25,13 +28,18 @@ func main() {
 	*/
 
 	args := os.Args[1:]
-	fmt.Println(args)
-	arguments, flag := generator.ProcessInput(args)
 
-	fmt.Println("Argumentos separados:")
-	fmt.Println(arguments)
+	// Processa os argumentos
+	input := generator.ProcessInput(args)
 
-	fmt.Println("Campos HTML gerados:")
-	fmt.Println(flag)
+	// Cria as informações a partir dos argumentos
+	nome := model.NovaFrase(50, input[0])
+	bio := model.NovoTexto(input[1])
+	ultimaAtualizacao := model.NovaData()
+
+	informacao := informacoes.NovaInformacao(nome, bio, ultimaAtualizacao)
+
+	// Gera o HTML com as informações
+	generator.GenerateHTMLFields([]interface{}{informacao.Nome, informacao.Biografia, informacao.UltimaAtualizacao})
 
 }
