@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	h "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
+	"github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
 )
 
 func CreateTableAndInsert(tableName string, idField string, h h.Html, destPath string) {
