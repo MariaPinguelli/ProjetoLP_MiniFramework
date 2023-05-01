@@ -1,17 +1,33 @@
 package model
 
-type Frase struct{
+import (
+	"time"
+)
+
+type Frase struct {
 	Tamanho int
 	Verboso string
-	Nulo bool
+	Required    bool
 }
 
-type Texto struct{
+type Texto struct {
 	Verboso string
-	Nulo bool
+	Required    bool
 }
 
-type Data struct{
+type Data struct {
 	Verboso string
-	Nulo bool
+	Required    bool
+}
+
+func NovaFrase(tamanho int, verboso string, required bool) *Frase {
+	return &Frase{Tamanho: tamanho, Verboso: verboso, Required: required}
+}
+
+func NovoTexto(verboso string, required bool) *Texto {
+	return &Texto{Verboso: verboso, Required: required}
+}
+
+func NovaData(required bool) *Data {
+	return &Data{Verboso: time.Now().Format("2006-01-02"), Required: required}
 }
