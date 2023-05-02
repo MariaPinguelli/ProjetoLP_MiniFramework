@@ -150,11 +150,11 @@ func (h *Html) AddSubmitButton() {
 	h.htmlString = htmlString
 }
 
-func (h *Html) RunHtml() {
+func (h *Html) RunHtml(){
 	server := &http.Server{
 		Addr: ":8080",
 	}
-
+	
 	http.HandleFunc("/", func(resWriter http.ResponseWriter, resHttp *http.Request) {
 		if resHttp.Method == "POST" {
 			resHttp.ParseForm()
@@ -165,7 +165,6 @@ func (h *Html) RunHtml() {
 			fmt.Print("\n\n")
 			fmt.Fprint(resWriter, "Formulário enviado!")
 			server.Close()
-			return
 		} else {
 			html := h.htmlString
 			fmt.Fprint(resWriter, html)

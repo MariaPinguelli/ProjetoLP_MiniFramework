@@ -2,9 +2,11 @@ package generator
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
 	model "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/model"
-	"strings"
+	"github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/sql"
 )
 
 func ProcessInput(args []string) []string {
@@ -22,7 +24,7 @@ func ProcessInput(args []string) []string {
 	return arguments
 }
 
-func GenerateHTMLFields(models []interface{}) {
+func GenerateForm(models []interface{}) {
 	htmlForm := html.StartHtml()
 	for _, m := range models {
 		// Checar o tipo do modelo e gerar um campo HTML apropriado
@@ -42,4 +44,5 @@ func GenerateHTMLFields(models []interface{}) {
 	}
     htmlForm.AddSubmitButton()
     htmlForm.RunHtml()
+	sql.CreateTableAndInsert(models, htmlForm.Values)
 }
