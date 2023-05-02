@@ -3,73 +3,92 @@ package sql
 import (
 	"fmt"
 	"math"
-	"os"
+	// "os"
 	"reflect"
 	"strconv"
-	"strings"
+	// "strings"
 
-	"github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
+	// h "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/html"
+	model "github.com/MariaPinguelli/ProjetoLP_MiniFramework/pkg/model"
 )
 
-func CreateTableAndInsert(tableName string, idField string, h h.Html, destPath string) {
-    sqlQuery := "CREATE TABLE "+tableName
-    sqlQueryFields := "INSERT INTO "+tableName+" ("
-    sqlQueryValues := "VALUES ("
-
-    _, ok := h.Values[idField]
-
-    if ok {
-        sqlQuery = fmt.Sprintf("%s %s %s PRIMARY KEY,", sqlQuery, idField, getType(idField))
-    }else{
-        sqlQuery = sqlQuery + " id INT PRIMARY KEY,"
-    }
-
-    for i := 0; i < len(h.FieldList); i++ {
-        if idField != h.FieldList[i]{
-            sqlQuery = fmt.Sprintf("%s %s %s", sqlQuery, h.Values[h.FieldList[i]], getType(h.Values[h.FieldList[i]]))
-            sqlQueryFields = fmt.Sprintf("%s%s",sqlQueryFields,h.FieldList[i])
-            if strings.Contains(getType(h.Values[h.FieldList[i]]), "VARCHAR"){
-                sqlQueryValues = fmt.Sprintf("%s'%s'", sqlQueryValues, h.Values[h.FieldList[i]])
-            }else{
-                sqlQueryValues = fmt.Sprintf("%s%s", sqlQueryValues, h.Values[h.FieldList[i]])
-            }
-        }
-
-        if i == len(h.FieldList)-1{
-            sqlQuery = sqlQuery+");\n"
-            sqlQueryFields = sqlQueryFields+") "
-            sqlQueryValues = sqlQueryValues+");\n"
-        }else{
-            sqlQuery = sqlQuery+", "
-            sqlQueryFields = sqlQueryFields+", "
-            sqlQueryValues = sqlQueryValues+", "
-        }
-    }
-
-    sqlQueryInsert := sqlQueryFields + sqlQueryValues
-
-    file, err := os.Create(destPath+tableName+".sql")
+func CreateTableAndInsert(tableName string, data []interface{}) {
+    // sqlQuery := "CREATE TABLE "+tableName
+    // sqlQueryFields := "INSERT INTO "+tableName+" ("
+    // sqlQueryValues := "VALUES ("
     
-	if err != nil {
-        fmt.Println("Erro ao criar o arquivo SQL:", err)
-        return
-    }
+	// _, ok := h.Values[idField]
+    // if ok {
+        //     sqlQuery = fmt.Sprintf("%s %s %s PRIMARY KEY,", sqlQuery, idField, getType(idField))
+        // }else{
+            //     sqlQuery = sqlQuery + " id INT PRIMARY KEY,"
+            // }
+            
+            // for i := 0; i < len(h.FieldList); i++ {
+            //     if idField != h.FieldList[i]{
+            //         sqlQuery = fmt.Sprintf("%s %s %s", sqlQuery, h.Values[h.FieldList[i]], getType(h.Values[h.FieldList[i]]))
+            //         sqlQueryFields = fmt.Sprintf("%s%s",sqlQueryFields,h.FieldList[i])
+            //         if strings.Contains(getType(h.Values[h.FieldList[i]]), "VARCHAR"){
+            //                 sqlQueryValues = fmt.Sprintf("%s'%s'", sqlQueryValues, h.Values[h.FieldList[i]])
+        	// 		}else{
+            // 			sqlQueryValues = fmt.Sprintf("%s%s", sqlQueryValues, h.Values[h.FieldList[i]])
+        	// 		}
+			// 	}
+        	// }
+    
+    //     if i == len(h.FieldList)-1{
+        //         sqlQuery = sqlQuery+");\n"
+        //         sqlQueryFields = sqlQueryFields+") "
+        //         sqlQueryValues = sqlQueryValues+");\n"
+        //     }else{
+            //         sqlQuery = sqlQuery+", "
+            //         sqlQueryFields = sqlQueryFields+", "
+            //         sqlQueryValues = sqlQueryValues+", "
+            //     }
+            // }
 
-    _, err = file.WriteString(sqlQuery)
-    if err != nil {
-        fmt.Println("Erro ao inserir querys no arquivo: ", err)
-        return
-    }
+	retorno := ""
+    for _, c := range data {
+		// Checar o tipo do modelo e gerar um campo HTML apropriado
+		switch c.(type) {
+		case model.Frase:
+			frase := c.(model.Frase)
+            retorno += AddFrase(frase)
+		case model.Texto:
+			texto := c.(model.Texto)
+			retorno += AddTexto(texto)
+        case model.Data:
+			data := c.(model.Data)
+            retorno += AddData(data)
+        default:
+			fmt.Print("Model desconhecida!")
+		}
+	}
+	fmt.Println("retorno", retorno)
+    // sqlQueryInsert := sqlQueryFields + sqlQueryValues
+    // fmt.Println(sqlQueryInsert)
+    // file, err := os.Create(destPath+tableName+".sql")
+    
+	// if err != nil {
+    //     fmt.Println("Erro ao criar o arquivo SQL:", err)
+    //     return
+    // }
 
-    _, err = file.WriteString(sqlQueryInsert)
-    if err != nil {
-        fmt.Println("Erro ao inserir querys no arquivo: ", err)
-        return
-    }
+    // _, err = file.WriteString(sqlQuery)
+    // if err != nil {
+    //     fmt.Println("Erro ao inserir querys no arquivo: ", err)
+    //     return
+    // }
 
-	defer file.Close()
+    // _, err = file.WriteString(sqlQueryInsert)
+    // if err != nil {
+    //     fmt.Println("Erro ao inserir querys no arquivo: ", err)
+    //     return
+    // }
 
-    fmt.Println("Querys SQL escrita com sucesso <3")
+	// defer file.Close()
+
+    // fmt.Println("Querys SQL escrita com sucesso <3")
 }
 
 func getType(value interface{}) string {
@@ -85,4 +104,16 @@ func getType(value interface{}) string {
         return "FLOAT"
     }
     return "UNKNOWN"
+}
+
+func AddFrase(frase model.Frase) string{
+    return fmt.Sprintf(`%s VARCHAR (%d), `, frase.Verboso, frase.Tamanho)
+}
+
+func AddTexto(texto model.Texto) string{
+    return fmt.Sprintf(`%s TEXT, `, texto.Verboso)
+}
+
+func AddData(data model.Data) string {
+    return fmt.Sprintf(`%s DATE);`, data.Verboso)
 }

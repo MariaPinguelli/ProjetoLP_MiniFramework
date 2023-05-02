@@ -29,7 +29,7 @@ func main() {
 		config_filepath = path.Join(cwd, "config.json")
     } else {
         fmt.Println("Não estamos executando no Windows")
-		config_filepath = path.Join(cwd, "../../config.json")
+		config_filepath = path.Join(cwd, "/config.json")
 
     }
 	
