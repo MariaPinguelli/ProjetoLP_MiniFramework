@@ -162,6 +162,7 @@ func (h *Html) RunHtml(){
 				h.Values[h.FieldList[i]] = resHttp.FormValue(h.FieldList[i])
 				fmt.Println(h.FieldList[i], ":", h.Values[h.FieldList[i]])
 			}
+			fmt.Println(h.Values, "h")
 			fmt.Print("\n\n")
 			fmt.Fprint(resWriter, "Formulário enviado!")
 			server.Close()

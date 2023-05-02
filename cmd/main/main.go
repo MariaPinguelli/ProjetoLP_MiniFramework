@@ -7,18 +7,29 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"path"
+	"runtime"
 )
 
 func main() {
 	var result map[string]interface{}
 	
 	cwd, err := os.Getwd()
+	
 	if err != nil {
 		fmt.Println("Erro ao ler o path do programa em execução:", err)
 		return
 	}
 
-	config_filepath := path.Join(cwd, "config.json")
+	config_filepath := ""
+	if runtime.GOOS == "windows" {
+        fmt.Println("Estamos executando no Windows")
+		config_filepath = path.Join(cwd, "config.json")
+    } else {
+        fmt.Println("Não estamos executando no Windows")
+		config_filepath = path.Join(cwd, "/config.json")
+
+    }
+	
 	jsonFile, err := os.Open(config_filepath)
 	if err != nil {
 		fmt.Printf("Erro ao ler o arquivo json: %s", err)

@@ -1,8 +1,8 @@
 package model
 
-import (
-	"time"
-)
+// import (
+// 	"time"
+// )
 
 type Frase struct {
 	Tamanho int
@@ -28,6 +28,6 @@ func NovoTexto(verboso string, required bool) *Texto {
 	return &Texto{Verboso: verboso, Required: required}
 }
 
-func NovaData(required bool) *Data {
-	return &Data{Verboso: time.Now().Format("2006-01-02"), Required: required}
+func NovaData(required bool, verboso string) *Data {
+	return &Data{Verboso: verboso, Required: required}
 }

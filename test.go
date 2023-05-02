@@ -11,9 +11,8 @@ var Data []interface{}
 func main(){
 	Data = append(Data, *model.NovaFrase(255, "FraseTeste", true))
 	Data = append(Data, *model.NovoTexto("TextoTeste", false))
-	Data = append(Data, *model.NovaData(true))
+	Data = append(Data, *model.NovaData(true, "DataTeste"))
 
-	generator.GenerateHTMLFields(Data)
-	
+	generator.GenerateTableAndFields("dados", Data)
 	fmt.Println(Data)
 }

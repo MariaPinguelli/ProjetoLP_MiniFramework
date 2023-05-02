@@ -24,7 +24,7 @@ func ProcessInput(args []string) []string {
 	return arguments
 }
 
-func GenerateForm(models []interface{}) {
+func GenerateTableAndFields(tableName string, models []interface{}) {
 	htmlForm := html.StartHtml()
 	for _, m := range models {
 		// Checar o tipo do modelo e gerar um campo HTML apropriado
@@ -44,5 +44,5 @@ func GenerateForm(models []interface{}) {
 	}
     htmlForm.AddSubmitButton()
     htmlForm.RunHtml()
-	sql.CreateTableAndInsert(models, htmlForm.Values)
+	sql.CreateTableAndInsert(tableName, models, htmlForm.Values)
 }
